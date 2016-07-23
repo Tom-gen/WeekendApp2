@@ -1,5 +1,7 @@
 package com.hanbit.user.weekendapp2.member;
 
+import android.database.sqlite.SQLiteDatabase;
+
 import java.lang.reflect.Member;
 import java.util.List;
 
@@ -12,6 +14,7 @@ public interface MemberService {
 
     /*add contact info into db*/
     public void add(Member bean);
+
     /*read : check Member's id/pw are correct*/
     public Boolean login(MemberBean bean);
 
@@ -20,6 +23,8 @@ public interface MemberService {
     public List<MemberBean> list();
 
     public MemberBean findByID(String id);
+
+    public List<MemberBean> findByName(SQLiteDatabase db, String name);
 
     /*update*/
     public void update(MemberBean bean);

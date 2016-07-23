@@ -1,6 +1,7 @@
 package com.hanbit.user.weekendapp2.member;
 
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import java.lang.reflect.Member;
@@ -60,6 +61,11 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public MemberBean findByID(String id) {
+        return null;
+    }
+
+    @Override
+    public List<MemberBean> findByName(SQLiteDatabase db, String name) {
         return null;
     }
 

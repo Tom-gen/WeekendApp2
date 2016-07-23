@@ -4,7 +4,7 @@ package com.hanbit.user.weekendapp2.member;
  * Created by 1027 on 2016-07-09.
  */
 public class MemberBean {
-    private String ID, PW, name, email, photo, address;
+    private String ID, PW, name, email, phone, photo, address;
 
     public String getID() {
         return ID;
@@ -36,6 +36,14 @@ public class MemberBean {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public String getPhoto() {

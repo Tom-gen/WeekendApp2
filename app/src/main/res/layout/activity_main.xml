@@ -8,43 +8,52 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/btJoin"
-        android:text="회원가입"/>
+        android:text="회원가입"
+        android:textSize="30dp"/>
     <!--read-->
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/btLogin"
-        android:text="로그인"/>
+        android:text="로그인"
+        android:textSize="30dp"/>
+
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/btContactCount"
-        android:text="연락처전체수"/>
+        android:text="연락처전체수"
+        android:textSize="30dp"/>
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/btContactList"
-        android:text="연락처목록"/>
+        android:text="연락처목록"
+        android:textSize="30dp"/>
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/btAddContact"
-        android:text="연락처등록"/>
+        android:text="연락처등록"
+        android:textSize="30dp"/>
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/btFindContact"
-        android:text="연락처찾기"/>
+        android:text="연락처찾기"
+        android:textSize="30dp"/>
     <!--update : DB수정-->
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/btUpdateContact"
-        android:text="연락처수정"/>
+        android:text="연락처수정"
+        android:textSize="30dp"/>
     <!--Delete: DB삭제-->
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/btDeleteContact"
-        android:text="연락처삭제"/>
+        android:text="연락처삭제"
+        android:textSize="30dp"/>
 </LinearLayout>
