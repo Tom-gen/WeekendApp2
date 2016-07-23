@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -45,25 +46,26 @@ public class MemberDAO extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
+        db.execSQL("drop table if exists " + TABLE_NAME);
+        onCreate(db);
     }
 
     /*insert into member*/
-    public void insert(SQLiteDatabase db, MemberBean bean) {
-
+    public void insert(/*SQLiteDatabase db,*/ MemberBean bean) {
         String query = "insert into " + TABLE_NAME
                 + String.format("(%s,%s,%s,%s,%s,%s,%s)"
                 , ID, PW, NAME, EMAIL, PHONE, PHOTO, ADDRESS)
                 + String.format(" values('%s','%s','%s','%s','%s','%s','%s'); "
                 , bean.getID(), bean.getPW(), bean.getName(), bean.getEmail(), bean.getPhone(), bean.getPhoto(), bean.getAddress());
-        db.execSQL(query);
+        SQLiteDatabase db = this.getWritableDatabase();
 
+        db.execSQL(query);
+        db.close();
     }
 
     public MemberBean login(MemberBean param) {
         MemberBean member = new MemberBean();
         SQLiteDatabase db = this.getReadableDatabase();
-
 
         String query = String.format("select * from " + TABLE_NAME + " where id='%s' and pw='%s' "
                 , param.getID(), param.getPW());
@@ -86,36 +88,79 @@ public class MemberDAO extends SQLiteOpenHelper {
         return member;
     }
 
-    public int count(SQLiteDatabase db, MemberBean bean) {
-
-        String query = "select count(*) from " + TABLE_NAME + ";";
+    public int count() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "select count(*) as count from " + TABLE_NAME + ";";
         Cursor cur = db.rawQuery(query, null);
-        return 0;
+        int result = 0;
+        if (cur.moveToNext()) {
+            result = cur.getInt(cur.getColumnIndex("count"));
+        }
+        return result;
     }
 
-    public List<MemberBean> list(SQLiteDatabase db) {
+    public List<MemberBean> list() {
+        SQLiteDatabase db = this.getReadableDatabase();
         String query = "select * from " + TABLE_NAME + ";";
         Cursor cur = db.rawQuery(query, null);
-        return null;
+        List<MemberBean> list = new ArrayList<>();
+        while (cur.moveToNext()) {
+            MemberBean bean = new MemberBean();
+            bean.setID(cur.getString(cur.getColumnIndex(ID)));
+            bean.setPW(cur.getString(cur.getColumnIndex(PW)));
+            bean.setName(cur.getString(cur.getColumnIndex(NAME)));
+            bean.setEmail(cur.getString(cur.getColumnIndex(EMAIL)));
+            bean.setPhone(cur.getString(cur.getColumnIndex(PHONE)));
+            bean.setPhoto(cur.getString(cur.getColumnIndex(PHOTO)));
+            bean.setAddress(cur.getString(cur.getColumnIndex(ADDRESS)));
+
+            list.add(bean);
+        }
+        return list;
     }
 
-    public List<MemberBean> findByName(SQLiteDatabase db, String name) {
+    public List<MemberBean> findByName(String name) {
+        SQLiteDatabase db = this.getReadableDatabase();
         String query = "select * from " + TABLE_NAME
                 + String.format(" where " + NAME + " like '%s%%';", name);
         Cursor cur = db.rawQuery(query, null);
-        return null;
+        List<MemberBean> list = new ArrayList<>();
+        while (cur.moveToNext()) {
+            MemberBean bean = new MemberBean();
+            bean.setID(cur.getString(cur.getColumnIndex(ID)));
+            bean.setPW(cur.getString(cur.getColumnIndex(PW)));
+            bean.setName(cur.getString(cur.getColumnIndex(NAME)));
+            bean.setEmail(cur.getString(cur.getColumnIndex(EMAIL)));
+            bean.setPhone(cur.getString(cur.getColumnIndex(PHONE)));
+            bean.setPhoto(cur.getString(cur.getColumnIndex(PHOTO)));
+            bean.setAddress(cur.getString(cur.getColumnIndex(ADDRESS)));
+
+            list.add(bean);
+        }
+        return list;
     }
 
-    public MemberBean findByID(SQLiteDatabase db, String id) {
+    public MemberBean findByID(String id) {
+        SQLiteDatabase db = this.getReadableDatabase();
         String query = "select * from " + TABLE_NAME
                 + String.format(" where " + ID + "='%s';", id);
         Cursor cur = db.rawQuery(query, null);
-        //if(cur.moveToNext())
-
-        return null;
+        MemberBean bean = null;
+        if (cur.moveToNext()) {
+            bean = new MemberBean();
+            bean.setID(cur.getString(cur.getColumnIndex(ID)));
+            bean.setPW(cur.getString(cur.getColumnIndex(PW)));
+            bean.setName(cur.getString(cur.getColumnIndex(NAME)));
+            bean.setEmail(cur.getString(cur.getColumnIndex(EMAIL)));
+            bean.setPhone(cur.getString(cur.getColumnIndex(PHONE)));
+            bean.setPhoto(cur.getString(cur.getColumnIndex(PHOTO)));
+            bean.setAddress(cur.getString(cur.getColumnIndex(ADDRESS)));
+        }
+        return bean;
     }
 
-    public void update(SQLiteDatabase db, MemberBean bean) {
+    public void update(MemberBean bean) {
+        SQLiteDatabase db = this.getWritableDatabase();
         String query = " update " + TABLE_NAME + " set "
                 + String.format(" %s='%s'", PW, bean.getPW())
                 + String.format(", %s='%s'", EMAIL, bean.getEmail())
@@ -123,11 +168,16 @@ public class MemberDAO extends SQLiteOpenHelper {
                 + String.format(", %s='%s'", ADDRESS, bean.getAddress())
                 + String.format(" where %s='%s';", ID, bean.getID());
         Cursor cur = db.rawQuery(query, null);
+        db.execSQL(query);
+        db.close();
     }
 
-    public void delete(SQLiteDatabase db, MemberBean bean) {
+    public void delete(String id) {
+        SQLiteDatabase db = this.getWritableDatabase();
         String query = " delete from " + TABLE_NAME
-                + String.format(" where %s='%s';", ID, bean.getID());
+                + String.format(" where %s='%s';", ID, id);
         Cursor cur = db.rawQuery(query, null);
+        db.execSQL(query);
+        db.close();
     }
 }

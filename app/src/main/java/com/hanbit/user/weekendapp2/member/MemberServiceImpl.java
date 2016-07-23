@@ -1,22 +1,20 @@
 package com.hanbit.user.weekendapp2.member;
 
 import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-import java.lang.reflect.Member;
 import java.util.List;
 
 /**
  * Created by 1027 on 2016-07-09.
  */
 public class MemberServiceImpl implements MemberService {
-
     private static MemberDAO dao;
+    Context context;
 
     public MemberServiceImpl(Context context) {
-
         dao = new MemberDAO(context);
+        this.context=context;
     }
 
     @Override
@@ -31,10 +29,13 @@ public class MemberServiceImpl implements MemberService {
         Log.d("입력한 name:", name);
         Log.d("입력한 email:", email);
 
+        dao.insert(bean);
+
     }
 
     @Override
-    public void add(Member bean) {
+    public void add(MemberBean bean) {
+        dao.insert(bean);
 
     }
 
@@ -51,31 +52,32 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public int count() {
-        return 0;
+        return dao.count();
     }
 
     @Override
     public List<MemberBean> list() {
-        return null;
+        return dao.list();
     }
 
     @Override
     public MemberBean findByID(String id) {
-        return null;
+        return dao.findByID(id);
     }
 
     @Override
-    public List<MemberBean> findByName(SQLiteDatabase db, String name) {
-        return null;
+    public List<MemberBean> findByName(String name) {
+        return dao.findByName(name);
     }
 
     @Override
     public void update(MemberBean bean) {
+        dao.update(bean);
 
     }
 
     @Override
-    public void delete(MemberBean bean) {
-
+    public void delete(String id) {
+        dao.delete(id);
     }
 }
