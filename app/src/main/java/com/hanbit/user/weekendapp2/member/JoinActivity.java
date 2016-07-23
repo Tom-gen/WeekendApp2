@@ -30,7 +30,7 @@ public class JoinActivity extends Activity implements View.OnClickListener {
         etAddress = (EditText) findViewById(R.id.etAddress);
         btSend = (Button) findViewById(R.id.btSend);
         btHome = (Button) findViewById(R.id.btHome);
-        tvResult = (TextView) findViewById(R.id.tvResult);
+//        tvResult = (TextView) findViewById(R.id.tvResult);
 
         btSend.setOnClickListener(this);
         btHome.setOnClickListener(this);

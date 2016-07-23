@@ -7,11 +7,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.hanbit.user.weekendapp2.map.MapsActivity;
 import com.hanbit.user.weekendapp2.member.JoinActivity;
 import com.hanbit.user.weekendapp2.member.LoginActivity;
 
 public class MainActivity extends Activity implements View.OnClickListener {
-    Button btJoin, btLogin, btContactCount, btContactList, btAddContact, btFindContact, btUpdateContact, btDeleteContact;
+    Button btJoin, btLogin, btContactCount, btContactList, btAddContact;
+    Button btFindContact, btUpdateContact, btDeleteContact, btGoogleMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +28,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         btFindContact = (Button) findViewById(R.id.btFindContact);
         btUpdateContact = (Button) findViewById(R.id.btUpdateContact);
         btDeleteContact = (Button) findViewById(R.id.btDeleteContact);
+        btGoogleMap = (Button) findViewById(R.id.btGoogleMap);
 
 //        set onClickListner at each buttons
         btJoin.setOnClickListener(this);
@@ -36,7 +39,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         btFindContact.setOnClickListener(this);
         btUpdateContact.setOnClickListener(this);
         btDeleteContact.setOnClickListener(this);
-
+        btGoogleMap.setOnClickListener(this);
     }
 
     @Override
@@ -75,7 +78,10 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 Toast.makeText(this, "btDeleteContact", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(this, LoginActivity.class));
                 break;
-
+            case R.id.btGoogleMap:
+                Toast.makeText(this, "btGoogleMap", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(this, MapsActivity.class));
+                break;
         }
 
     }

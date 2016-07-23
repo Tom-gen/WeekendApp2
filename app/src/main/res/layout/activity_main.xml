@@ -56,4 +56,10 @@
         android:id="@+id/btDeleteContact"
         android:text="연락처삭제"
         android:textSize="30dp"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btGoogleMap"
+        android:text="구글맵"
+        android:textSize="30dp"/>
 </LinearLayout>
