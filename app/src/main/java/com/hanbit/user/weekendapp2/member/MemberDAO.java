@@ -7,7 +7,6 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by 1027 on 2016-07-16.
@@ -42,11 +41,15 @@ public class MemberDAO extends SQLiteOpenHelper {
         sb.append(", photo text");
         sb.append(", address text);");
         db.execSQL(sb.toString());
+        String sql = "create table if not exists guest( _id integer primary key autoincrement "
+                + ", name text, phone text);";
+        db.execSQL(sql);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("drop table if exists " + TABLE_NAME);
+        db.execSQL("drop table if exists member");
+        db.execSQL("drop table if exists guest");
         onCreate(db);
     }
 
@@ -99,11 +102,15 @@ public class MemberDAO extends SQLiteOpenHelper {
         return result;
     }
 
-    public List<MemberBean> list() {
+    public ArrayList<MemberBean> list() {
         SQLiteDatabase db = this.getReadableDatabase();
-        String query = "select * from " + TABLE_NAME + ";";
+        String query = "select "
+                + String.format("%s, %s, %s, %s, %s, %s, %s"
+                , ID, PW, NAME, EMAIL, PHONE, PHOTO, ADDRESS)
+                + " from " + TABLE_NAME + ";";
         Cursor cur = db.rawQuery(query, null);
-        List<MemberBean> list = new ArrayList<>();
+        ArrayList<MemberBean> list = new ArrayList<>();
+
         while (cur.moveToNext()) {
             MemberBean bean = new MemberBean();
             bean.setID(cur.getString(cur.getColumnIndex(ID)));
@@ -119,12 +126,15 @@ public class MemberDAO extends SQLiteOpenHelper {
         return list;
     }
 
-    public List<MemberBean> findByName(String name) {
+    public ArrayList<MemberBean> findByName(String name) {
         SQLiteDatabase db = this.getReadableDatabase();
-        String query = "select * from " + TABLE_NAME
+        String query = "select "
+                + String.format("%s, %s, %s, %s, %s, %s, %s"
+                , ID, PW, NAME, EMAIL, PHONE, PHOTO, ADDRESS)
+                + " from " + TABLE_NAME
                 + String.format(" where " + NAME + " like '%s%%';", name);
         Cursor cur = db.rawQuery(query, null);
-        List<MemberBean> list = new ArrayList<>();
+        ArrayList<MemberBean> list = new ArrayList<>();
         while (cur.moveToNext()) {
             MemberBean bean = new MemberBean();
             bean.setID(cur.getString(cur.getColumnIndex(ID)));
@@ -142,7 +152,10 @@ public class MemberDAO extends SQLiteOpenHelper {
 
     public MemberBean findByID(String id) {
         SQLiteDatabase db = this.getReadableDatabase();
-        String query = "select * from " + TABLE_NAME
+        String query = "select "
+                + String.format("%s, %s, %s, %s, %s, %s, %s"
+                , ID, PW, NAME, EMAIL, PHONE, PHOTO, ADDRESS)
+                + " from " + TABLE_NAME
                 + String.format(" where " + ID + "='%s';", id);
         Cursor cur = db.rawQuery(query, null);
         MemberBean bean = null;

@@ -6,7 +6,7 @@ import android.widget.TextView;
 /**
  * Created by 1027 on 2016-07-16.
  */
-public class ViewHolder {
+public class ViewHolder2 {
     TextView name, email, phoneNo;
     ImageView photo;
 

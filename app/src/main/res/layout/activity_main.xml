@@ -33,6 +33,13 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/btGuestList"
+        android:text="게스트목록"
+        android:textSize="30dp"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:id="@+id/btAddContact"
         android:text="연락처등록"
         android:textSize="30dp"/>
@@ -48,13 +55,6 @@
         android:layout_height="wrap_content"
         android:id="@+id/btUpdateContact"
         android:text="연락처수정"
-        android:textSize="30dp"/>
-    <!--Delete: DB삭제-->
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/btDeleteContact"
-        android:text="연락처삭제"
         android:textSize="30dp"/>
     <Button
         android:layout_width="match_parent"

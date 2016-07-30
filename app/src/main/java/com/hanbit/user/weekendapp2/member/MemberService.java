@@ -1,5 +1,6 @@
 package com.hanbit.user.weekendapp2.member;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,7 +18,7 @@ public interface MemberService {
 
     public int count();
 
-    public List<MemberBean> list();
+    public ArrayList<MemberBean> list();
 
     public MemberBean findByID(String id);
 

@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.hanbit.user.weekendapp2.MainActivity;
 import com.hanbit.user.weekendapp2.R;
 
+
 public class JoinActivity extends Activity implements View.OnClickListener {
 
     EditText etID, etPW, etName, etEmail, etPhone, etPhoto, etAddress;

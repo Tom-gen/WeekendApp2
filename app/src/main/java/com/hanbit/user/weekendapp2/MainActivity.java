@@ -7,13 +7,17 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.google.android.gms.nearby.messages.internal.Update;
 import com.hanbit.user.weekendapp2.map.MapsActivity;
+import com.hanbit.user.weekendapp2.member.AddActivity;
+import com.hanbit.user.weekendapp2.member.GuestListActivity;
 import com.hanbit.user.weekendapp2.member.JoinActivity;
 import com.hanbit.user.weekendapp2.member.LoginActivity;
+import com.hanbit.user.weekendapp2.member.MemberListActivity;
 
 public class MainActivity extends Activity implements View.OnClickListener {
-    Button btJoin, btLogin, btContactCount, btContactList, btAddContact;
-    Button btFindContact, btUpdateContact, btDeleteContact, btGoogleMap;
+    Button btJoin, btLogin, btContactCount, btContactList, btGuestList, btAddContact;
+    Button btFindContact, btUpdateContact, btGoogleMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,10 +28,10 @@ public class MainActivity extends Activity implements View.OnClickListener {
         btLogin = (Button) findViewById(R.id.btLogin);
         btContactCount = (Button) findViewById(R.id.btContactCount);
         btContactList = (Button) findViewById(R.id.btContactList);
+        btGuestList = (Button) findViewById(R.id.btGuestList);
         btAddContact = (Button) findViewById(R.id.btAddContact);
         btFindContact = (Button) findViewById(R.id.btFindContact);
         btUpdateContact = (Button) findViewById(R.id.btUpdateContact);
-        btDeleteContact = (Button) findViewById(R.id.btDeleteContact);
         btGoogleMap = (Button) findViewById(R.id.btGoogleMap);
 
 //        set onClickListner at each buttons
@@ -35,10 +39,10 @@ public class MainActivity extends Activity implements View.OnClickListener {
         btLogin.setOnClickListener(this);
         btContactCount.setOnClickListener(this);
         btContactList.setOnClickListener(this);
+        btGuestList.setOnClickListener(this);
         btAddContact.setOnClickListener(this);
         btFindContact.setOnClickListener(this);
         btUpdateContact.setOnClickListener(this);
-        btDeleteContact.setOnClickListener(this);
         btGoogleMap.setOnClickListener(this);
     }
 
@@ -56,27 +60,28 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 break;
             case R.id.btContactCount:
                 Toast.makeText(this, "btContactCount", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(this, CountActivity.class));
 
                 break;
             case R.id.btContactList:
                 Toast.makeText(this, "btContactList", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(this, LoginActivity.class));
+                startActivity(new Intent(this, MemberListActivity.class));
+                break;
+            case R.id.btGuestList:
+                Toast.makeText(this, "btGuestList", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(this, GuestListActivity.class));
                 break;
             case R.id.btAddContact:
                 Toast.makeText(this, "btAddContact", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(this, LoginActivity.class));
+                startActivity(new Intent(this, AddActivity.class));
                 break;
             case R.id.btFindContact:
                 Toast.makeText(this, "btFindContact", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(this, LoginActivity.class));
+                startActivity(new Intent(this, FindActivity.class));
                 break;
             case R.id.btUpdateContact:
                 Toast.makeText(this, "btUpdateContact", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(this, LoginActivity.class));
-                break;
-            case R.id.btDeleteContact:
-                Toast.makeText(this, "btDeleteContact", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(this, LoginActivity.class));
+                startActivity(new Intent(this, Update.class));
                 break;
             case R.id.btGoogleMap:
                 Toast.makeText(this, "btGoogleMap", Toast.LENGTH_SHORT).show();

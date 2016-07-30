@@ -48,11 +48,11 @@ public class Adapter extends BaseAdapter {
 
     @Override
     public View getView(int i, View v, ViewGroup parent) {
-        ViewHolder holder;
+        ViewHolder2 holder;
 
         if (v == null) {
             v = inflater.inflate(R.layout.person, null);
-            holder = new ViewHolder();
+            holder = new ViewHolder2();
             holder.setName((TextView) v.findViewById(R.id.name));
             holder.setEmail((TextView) v.findViewById(R.id.email));
             holder.setPhoneNo((TextView) v.findViewById(R.id.phoneNo));
@@ -60,7 +60,7 @@ public class Adapter extends BaseAdapter {
 
             v.setTag(holder);
         } else {
-            holder = (ViewHolder) v.getTag();
+            holder = (ViewHolder2) v.getTag();
         }
 
         Person person = list.get(i);
